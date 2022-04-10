@@ -6,12 +6,12 @@
 #error Select ESP32 board.
 #endif
 
-/**************************************************************/
-/* Example how to read DHT sensors from an ESP32 using multi- */
-/* tasking.                                                   */
-/* This example depends on the Ticker library to wake up      */
-/* the task every 20 seconds                                  */
-/**************************************************************/
+/**************************************************************
+   Example how to read DHT sensors from an ESP32 using multi-
+   tasking.
+   This example depends on the Ticker library to wake up
+   the task every 20 seconds
+ **************************************************************/
 
 DHTesp dht;
 
@@ -28,31 +28,31 @@ ComfortState cf;
 /** Flag if task should run */
 bool tasksEnabled = false;
 /** Pin number for DHT11 data pin */
-int dhtPin = 17;
+int dhtPin = 18;
 
 /**
- * initTemp
- * Setup DHT library
- * Setup task and timer for repeated measurement
- * @return bool
- *    true if task and timer are started
- *    false if task or timer couldn't be started
- */
+   initTemp
+   Setup DHT library
+   Setup task and timer for repeated measurement
+   @return bool
+      true if task and timer are started
+      false if task or timer couldn't be started
+*/
 bool initTemp() {
   byte resultValue = 0;
   // Initialize temperature sensor
-	dht.setup(dhtPin, DHTesp::DHT11);
-	Serial.println("DHT initiated");
+  dht.setup(dhtPin, DHTesp::DHT11);
+  Serial.println("DHT initiated");
 
   // Start task to get temperature
-	xTaskCreatePinnedToCore(
-			tempTask,                       /* Function to implement the task */
-			"tempTask ",                    /* Name of the task */
-			4000,                           /* Stack size in words */
-			NULL,                           /* Task input parameter */
-			5,                              /* Priority of the task */
-			&tempTaskHandle,                /* Task handle. */
-			1);                             /* Core where the task should run */
+  xTaskCreatePinnedToCore(
+    tempTask,                       /* Function to implement the task */
+    "tempTask ",                    /* Name of the task */
+    4000,                           /* Stack size in words */
+    NULL,                           /* Task input parameter */
+    5,                              /* Priority of the task */
+    &tempTaskHandle,                /* Task handle. */
+    1);                             /* Core where the task should run */
 
   if (tempTaskHandle == NULL) {
     Serial.println("Failed to start task for temperature update");
@@ -65,57 +65,57 @@ bool initTemp() {
 }
 
 /**
- * triggerGetTemp
- * Sets flag dhtUpdated to true for handling in loop()
- * called by Ticker getTempTimer
- */
+   triggerGetTemp
+   Sets flag dhtUpdated to true for handling in loop()
+   called by Ticker getTempTimer
+*/
 void triggerGetTemp() {
   if (tempTaskHandle != NULL) {
-	   xTaskResumeFromISR(tempTaskHandle);
+    xTaskResumeFromISR(tempTaskHandle);
   }
 }
 
 /**
- * Task to reads temperature from DHT11 sensor
- * @param pvParameters
- *    pointer to task parameters
- */
+   Task to reads temperature from DHT11 sensor
+   @param pvParameters
+      pointer to task parameters
+*/
 void tempTask(void *pvParameters) {
-	Serial.println("tempTask loop started");
-	while (1) // tempTask loop
+  Serial.println("tempTask loop started");
+  while (1) // tempTask loop
   {
     if (tasksEnabled) {
       // Get temperature values
-			getTemperature();
-		}
+      getTemperature();
+    }
     // Got sleep again
-		vTaskSuspend(NULL);
-	}
+    vTaskSuspend(NULL);
+  }
 }
 
 /**
- * getTemperature
- * Reads temperature from DHT11 sensor
- * @return bool
- *    true if temperature could be aquired
- *    false if aquisition failed
+   getTemperature
+   Reads temperature from DHT11 sensor
+   @return bool
+      true if temperature could be aquired
+      false if aquisition failed
 */
 bool getTemperature() {
-	// Reading temperature for humidity takes about 250 milliseconds!
-	// Sensor readings may also be up to 2 seconds 'old' (it's a very slow sensor)
+  // Reading temperature for humidity takes about 250 milliseconds!
+  // Sensor readings may also be up to 2 seconds 'old' (it's a very slow sensor)
   TempAndHumidity newValues = dht.getTempAndHumidity();
-	// Check if any reads failed and exit early (to try again).
-	if (dht.getStatus() != 0) {
-		Serial.println("DHT11 error status: " + String(dht.getStatusString()));
-		return false;
-	}
+  // Check if any reads failed and exit early (to try again).
+  if (dht.getStatus() != 0) {
+    Serial.println("DHT11 error status: " + String(dht.getStatusString()));
+    return false;
+  }
 
-	float heatIndex = dht.computeHeatIndex(newValues.temperature, newValues.humidity);
+  float heatIndex = dht.computeHeatIndex(newValues.temperature, newValues.humidity);
   float dewPoint = dht.computeDewPoint(newValues.temperature, newValues.humidity);
   float cr = dht.getComfortRatio(cf, newValues.temperature, newValues.humidity);
 
   String comfortStatus;
-  switch(cf) {
+  switch (cf) {
     case Comfort_OK:
       comfortStatus = "Comfort_OK";
       break;
@@ -149,10 +149,10 @@ bool getTemperature() {
   };
 
   Serial.println(" T:" + String(newValues.temperature) + " H:" + String(newValues.humidity) + " I:" + String(heatIndex) + " D:" + String(dewPoint) + " " + comfortStatus);
-	return true;
+  return true;
 }
 
-void setup()
+void temp_setup()
 {
   Serial.begin(115200);
   Serial.println();
@@ -162,15 +162,24 @@ void setup()
   tasksEnabled = true;
 }
 
+void setup() {
+  temp_setup();
+}
+
+void temp_loop() {
+  // Enable task that will read values from the DHT sensor
+  tasksEnabled = true;
+  if (tempTaskHandle != NULL) {
+    vTaskResume(tempTaskHandle);
+  }
+}
+
 void loop() {
   if (!tasksEnabled) {
     // Wait 2 seconds to let system settle down
     delay(2000);
-    // Enable task that will read values from the DHT sensor
-    tasksEnabled = true;
-    if (tempTaskHandle != NULL) {
-			vTaskResume(tempTaskHandle);
-		}
+
+    temp_loop();
   }
   yield();
 }
