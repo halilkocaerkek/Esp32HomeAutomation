@@ -1,6 +1,6 @@
 using api.services;
 
-namespace Services;
+namespace api.Services;
 
 public interface IEsp32Service
 {

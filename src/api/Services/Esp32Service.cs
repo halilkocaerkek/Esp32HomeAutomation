@@ -1,10 +1,10 @@
 using api.services;
 
-namespace Services;
+namespace api.Services;
 
 public class Esp32Service : IEsp32Service
 {
-    private List<TempData> _data;
+    private readonly List<TempData> _data;
 
     public Esp32Service()
     {
