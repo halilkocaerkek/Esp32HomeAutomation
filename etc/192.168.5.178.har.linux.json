@@ -1,0 +1,204 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [
+      {
+        "startedDateTime": "2022-04-17T21:07:06.258Z",
+        "id": "page_1",
+        "title": "http://192.168.5.178/",
+        "pageTimings": {
+          "onContentLoad": 287.1640000012121,
+          "onLoad": 307.85000000105356
+        }
+      }
+    ],
+    "entries": [
+      {
+        "_initiator": {
+          "type": "other"
+        },
+        "_priority": "VeryHigh",
+        "_resourceType": "document",
+        "cache": {},
+        "connection": "11064",
+        "pageref": "page_1",
+        "request": {
+          "method": "GET",
+          "url": "http://192.168.5.178/",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Accept",
+              "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-GB,en;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,tr;q=0.5"
+            },
+            {
+              "name": "Cache-Control",
+              "value": "max-age=0"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Host",
+              "value": "192.168.5.178"
+            },
+            {
+              "name": "Upgrade-Insecure-Requests",
+              "value": "1"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": 497,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Content-type",
+              "value": "text/html"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 37,
+            "mimeType": "text/html",
+            "compression": 0,
+            "text": "22.50,41.00,21.88,8.61,Comfort_OK\r\n\r\n"
+          },
+          "redirectURL": "",
+          "headersSize": 43,
+          "bodySize": 37,
+          "_transferSize": 80,
+          "_error": null
+        },
+        "serverIPAddress": "192.168.5.178",
+        "startedDateTime": "2022-04-17T21:07:06.253Z",
+        "time": 148.57499999916902,
+        "timings": {
+          "blocked": 5.746999998700106,
+          "dns": 0.01100000000000001,
+          "ssl": -1,
+          "connect": 73.092,
+          "send": 0.1950000000000074,
+          "wait": 43.76699999900744,
+          "receive": 25.763000001461478,
+          "_blocked_queueing": 5.4229999987001065
+        }
+      },
+      {
+        "_initiator": {
+          "type": "other"
+        },
+        "_priority": "High",
+        "_resourceType": "other",
+        "cache": {},
+        "connection": "11071",
+        "pageref": "page_1",
+        "request": {
+          "method": "GET",
+          "url": "http://192.168.5.178/favicon.ico",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Accept",
+              "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-GB,en;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,tr;q=0.5"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Host",
+              "value": "192.168.5.178"
+            },
+            {
+              "name": "Referer",
+              "value": "http://192.168.5.178/"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": 413,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Content-type",
+              "value": "text/html"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 37,
+            "mimeType": "text/html",
+            "compression": 0,
+            "text": "22.50,41.00,21.88,8.61,Comfort_OK\r\n\r\n"
+          },
+          "redirectURL": "",
+          "headersSize": 43,
+          "bodySize": 37,
+          "_transferSize": 80,
+          "_error": null
+        },
+        "serverIPAddress": "192.168.5.178",
+        "startedDateTime": "2022-04-17T21:07:06.568Z",
+        "time": 109.33600000033341,
+        "timings": {
+          "blocked": 1.007000000532018,
+          "dns": 0.0030000000000000027,
+          "ssl": -1,
+          "connect": 69.173,
+          "send": 0.25,
+          "wait": 36.63900000096997,
+          "receive": 2.263999998831423,
+          "_blocked_queueing": 0.915000000532018
+        }
+      }
+    ]
+  }
+}

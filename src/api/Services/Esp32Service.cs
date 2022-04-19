@@ -11,10 +11,10 @@ public class Esp32Service : IEsp32Service
         this._data = new List<TempData>();
     }
 
-    public object AddTempAndHum(float temperature, float humidity)
+    public object AddTempAndHum(float temperature, float humidity, float heatIndex, float dewPoint, string comfortStatus)
     {
-        _data.Add(new TempData(humidity, temperature, DateTime.UtcNow));
-        return $"ok => {temperature}, {humidity}";
+        _data.Add(new TempData(humidity, temperature, heatIndex, dewPoint, comfortStatus,DateTime.UtcNow));
+        return $"ok => {DateTime.UtcNow}: {temperature}, {humidity}";
     }
 
     public List<TempData> GetAll()

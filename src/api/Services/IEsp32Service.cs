@@ -4,6 +4,7 @@ namespace api.Services;
 
 public interface IEsp32Service
 {
-    object AddTempAndHum(float temperature, float humidity);
-    List<TempData> GetAll();
+ 
+    List<TempData> GetAll(); 
+    object AddTempAndHum(float temperature, float humidity, float heatIndex, float dewPoint, string comfortStatus);
 }
