@@ -1,4 +1,5 @@
 ﻿using App1.Models;
+using App1.Services;
 using App1.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -10,6 +11,8 @@ namespace App1.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
+        TempService tempService;
+
         public string time ;
         public string Time
         {
@@ -28,6 +31,7 @@ namespace App1.ViewModels
         {
             Title = "Timer";
             IsBusy = true;
+            tempService = new TempService();
             Device.StartTimer(TimeSpan.FromSeconds(1.0 / 60), OnTimerTick);
         }
 
